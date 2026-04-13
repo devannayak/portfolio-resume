@@ -189,10 +189,39 @@
     lucide.createIcons();
   });
 
-  function downloadPDF() {
-    const element = document.getElementById("resume");
-    html2pdf().from(element).save("Deven_Nayak_Resume.pdf");
+  let qrLoaded = false;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const portfolioURL = "https://devannayak.github.io/portfolio-resume/";
+
+  const qrImg = document.getElementById("qrCode");
+
+  qrImg.onload = function () {
+    qrLoaded = true;
+  };
+
+  qrImg.src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
+    encodeURIComponent(portfolioURL);
+
+  lucide.createIcons();
+});
+
+function downloadPDF() {
+  if (!qrLoaded) {
+    alert("QR loading... please try again in a second");
+    return;
   }
+
+  const element = document.getElementById("resume");
+
+  html2pdf().set({
+    margin: 0.3,
+    filename: 'Deven_Nayak_Resume.pdf',
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4' }
+  }).from(element).save();
+}
 </script>
 
 </body>
