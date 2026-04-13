@@ -178,20 +178,22 @@
   </div>
 
   <!-- SCRIPT -->
-  <script>
-    const portfolioURL = "https://your-portfolio-link.com";
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const portfolioURL = "https://devannayak.github.io/portfolio-resume/";
 
     document.getElementById("qrCode").src =
-      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + portfolioURL;
-
-    function downloadPDF() {
-      const element = document.getElementById("resume");
-
-      html2pdf().from(element).save("Deven_Nayak_Resume.pdf");
-    }
+  "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(portfolioURL);
 
     lucide.createIcons();
-  </script>
+  });
+
+  function downloadPDF() {
+    const element = document.getElementById("resume");
+    html2pdf().from(element).save("Deven_Nayak_Resume.pdf");
+  }
+</script>
 
 </body>
 </html>
